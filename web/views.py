@@ -1,11 +1,10 @@
 #coding:utf-8
-from flask import Blueprint,render_template,redirect,flash,url_for,request
-import urllib2,ssl,json
-from models import User,db
+from flask import render_template,redirect, url_for,request,session
 from web import app
+from models import User,db
 
 
-@app.route('/login',methods=('POST','GET'))
+@app.route('/login',methods=['POST','GET'])
 def login():
     """View function for home page"""
     context={}
@@ -18,7 +17,8 @@ def login():
         user = db.session.query(User).filter_by(username = username).all()
         passwd = db.session.query(User).filter_by(username=username, password=password).all()
         if user and passwd:
-                return redirect(url_for('home'))
+            session['username'] = username
+            return redirect(url_for('home'))
         elif not user:
             info = 'please check username'
         else:
@@ -29,5 +29,10 @@ def login():
 # @login_required
 def home():
     """View function for home page"""
-    username='kbsonlong'
-    return render_template('WEB/index.html',username = username)
+
+    if 'username' in session:
+        username = session['username']
+        print username
+        return render_template('WEB/index.html', username=username)
+
+    return render_template('WEB/login.html')

@@ -1,4 +1,4 @@
-
+# coding:utf-8
 
 class Config(object):
     """Base config class."""
@@ -14,4 +14,6 @@ class DevConfig(Config):
     DEBUG = True
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:kbsonlong@along_db:33060/cmdb'
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    port = 5001
+
+    ##解决the session is unavailable because no secret key was set.错误
+    SECRET_KEY='kbsonlong'
