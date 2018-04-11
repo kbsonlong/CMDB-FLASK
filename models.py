@@ -1,11 +1,12 @@
 # coding:utf-8
 
-from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin
 from datetime import datetime
-from web import  app
-
+from flask_sqlalchemy import SQLAlchemy
+from api import  app
 db = SQLAlchemy(app)
+
+
 
 ##用户跟角色关系表
 role_user = db.Table('role_user',
