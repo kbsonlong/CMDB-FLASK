@@ -1,8 +1,8 @@
 #coding:utf-8
 from flask import Blueprint,render_template,redirect,flash,url_for,request
 import urllib2,ssl,json
-from main import app
 from models import User,db
+from web import app
 
 
 @app.route('/login',methods=('POST','GET'))

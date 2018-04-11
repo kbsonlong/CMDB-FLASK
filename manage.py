@@ -5,10 +5,11 @@ from flask_script import Manager, Server
 from flask_migrate import Migrate,MigrateCommand
 import main
 import models
+import  web
 
 # Init manager object via app object
-manager = Manager(main.app)
-migrate = Migrate(main.app, models.db)
+manager = Manager(web.app)
+migrate = Migrate(web.app, models.db)
 
 # Create a new commands: server
 # This command will be run the Flask development_env server
@@ -25,7 +26,7 @@ def make_shell_context():
     """
     # 确保有导入 Flask app object，否则启动的 CLI 上下文中仍然没有 app 对象
     return dict(app=main.app,
-                db = main.db,
+                db = models.db,
                 User = models.User,
                 Role = models.Role,
                 role_user = models.role_user,
