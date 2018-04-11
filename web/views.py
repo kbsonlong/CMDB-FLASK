@@ -4,6 +4,7 @@ from web import app
 from flask_jsonrpc import JSONRPC
 import requests,json
 
+
 jsonrpc = JSONRPC(app, '/api')
 headers = {'content-type': 'application/json'}
 
@@ -25,6 +26,7 @@ def login():
         print result
         if result['code'] == 0:
             session['username'] = username
+            session['author'] = result['authorization']
             return redirect(url_for('home'))
         elif result['code'] == 1:
             info = result['errmsg']
@@ -35,16 +37,15 @@ def login():
 # @login_required
 def home():
     """View function for home page"""
-
+    authorization = session['author']
+    print authorization
     if 'username' in session:
         username = session['username']
-        print username
         return render_template('WEB/index.html', username=username)
-
-    return render_template('WEB/login.html')
+    return redirect(url_for('login'))
 
 @app.route('/logout')
 def logout():
     # remove the username from the session if it's there
     session.pop('username', None)
-    return redirect(url_for('home'))
+    return redirect(url_for('login'))

@@ -4,10 +4,7 @@ from flask import request,session,redirect,url_for
 from api import app
 from models import db,User
 import json,time,traceback,hashlib,base64
-
-
-
-
+from auth import validate
 
 def get_validate(username, password):
     t = int(time.time())
