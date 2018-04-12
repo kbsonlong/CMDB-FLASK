@@ -12,6 +12,5 @@ handler = logging.FileHandler(DevConfig.WEB_LOGFILE)
 handler.setFormatter(fmt=fmter)
 app.logger.addHandler(handler)
 
-
 if __name__ == '__main__':
     app.run(host='0.0.0.0',port=5000)
