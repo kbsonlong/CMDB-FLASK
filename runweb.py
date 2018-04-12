@@ -6,7 +6,6 @@ import logging
 
 app.config.from_object(DevConfig)
 
-
 fmter = logging.Formatter('%(asctime)s %(levelname)s %(message)s', datefmt='%a, %d %b %Y %H:%M:%S')
 handler = logging.FileHandler(DevConfig.WEB_LOGFILE)
 handler.setFormatter(fmt=fmter)
