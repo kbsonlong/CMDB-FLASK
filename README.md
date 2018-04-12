@@ -18,7 +18,7 @@
 
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{username}:{password}@{host}:{post}/{databasename}'
 
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:kbsonlong@cmdb_db:8080/cmdb2'
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:kbsonlong@cmdb_db:3306/cmdb2'
 
 # 二、安装集成环境
 
