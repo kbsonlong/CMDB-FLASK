@@ -10,4 +10,4 @@ app.config.from_object(DevConfig)
 # app.logger.addHandler(handler)
 
 if __name__ == '__main__':
-    app.run(port=5001)
+    app.run(host='0.0.0.0',port=5001)
