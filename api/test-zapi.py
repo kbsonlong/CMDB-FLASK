@@ -121,4 +121,7 @@ for item in zapi.item.get(output="extend",hostids=10084):
 
 #主机组
 for group in zapi.hostgroup.get(output="extend"):
-    print group['name']
+    print group
+
+
+print zapi.host.create(groupid=50,templateid=20045,ip='192.168.3.1',host='Linux server')
