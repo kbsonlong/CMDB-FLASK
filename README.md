@@ -1,6 +1,6 @@
-#一、安装
+# 一、安装
 
-##1、安装沙盒环境
+## 1、安装沙盒环境
 
     pip install virtualenv
 
@@ -8,23 +8,24 @@
 
     source cmdb/bin/activate
 
-##2、安装CMDB-FLASK
+## 2、安装CMDB-FLASK
 
     git clone https://github.com/kbsonlong/CMDB-FLASK.git
 
     cd  CMDB-FLASK && pip install -r requirements.txt
 
-##3、修改配置
+## 3、修改配置
 
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://{username}:{password}@{host}:{post}/{databasename}'
 
     SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:kbsonlong@cmdb_db:8080/cmdb2'
 
-#二、安装集成环境
+# 二、安装集成环境
 
-##1、使用Docker快速搭建zabbix环境
+## 1、使用Docker快速搭建zabbix环境
 
 ### 安装数据库mysql
+
     docker run --name cmdb-db --hostname zabbix-mysql-server \
     -e MYSQL_ROOT_PASSWORD="kbsonlong" \
     -e MYSQL_USER="root" \
@@ -34,7 +35,8 @@
     -d mysql:5.7 \
     --character-set-server=utf8 --collation-server=utf8_bin
 
-###创建zabbix-server
+### 创建zabbix-server
+
     docker run  --name cmd-zabbix-server-mysql --hostname zabbix-server-mysql \
     --link cmdb-db:mysql \
     -e DB_SERVER_HOST="mysql" \
@@ -48,7 +50,7 @@
     -d \
     zabbix/zabbix-server-mysql
 
-###安装web-nginx
+### 安装web-nginx
 
     docker run --name cmd-zabbix-web-nginx-mysql --hostname zabbix-web-nginx-mysql \
     --link cmdb-db:mysql \
@@ -64,6 +66,6 @@
     -d \
     zabbix/zabbix-web-nginx-mysql
 
-###安装zabbix-agent
+### 安装zabbix-agent
 
     docker run --name cmdb-zabbix-agent --link cmd-zabbix-server-mysql:zabbix-server -d zabbix/zabbix-agent:latest
