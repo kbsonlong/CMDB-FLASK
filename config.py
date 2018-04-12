@@ -18,3 +18,4 @@ class DevConfig(Config):
     SECRET_KEY='kbsonlong2'
     WEB_LOGFILE='web.log'
     API_LOGFILE='api.log'
+    API_HOST='127.0.0.1:5001'

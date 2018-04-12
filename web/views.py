@@ -3,7 +3,7 @@ from flask import render_template,redirect, url_for,request,session
 from web import app
 from flask_jsonrpc import JSONRPC
 import requests,json
-
+from config import DevConfig
 
 jsonrpc = JSONRPC(app, '/api')
 headers = {'content-type': 'application/json'}
@@ -18,7 +18,7 @@ def login():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        url = "http://%s/api/login?username=%s&passwd=%s" % ('127.0.0.1:5001', username, password)
+        url = "http://%s/api/login?username=%s&passwd=%s" % (DevConfig.API_HOST, username, password)
         print url
         r = requests.get(url, headers=headers)  # 请求API验证用户，并获取token
         result = json.loads(r.content)
