@@ -9,7 +9,6 @@ jsonrpc = JSONRPC(app, '/api')
 headers = {'content-type': 'application/json'}
 
 @app.route('/login',methods=['POST','GET'])
-# @jsonrpc.method('App.login')
 def login():
     """View function for home page"""
     context={}
@@ -40,7 +39,6 @@ def home():
     if 'username' in session:
         username = session['username']
         authorization = session['author']
-        app.logger.info(authorization)
         return render_template('WEB/index.html', username=username)
     return redirect(url_for('login'))
 
