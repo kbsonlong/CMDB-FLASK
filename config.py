@@ -12,7 +12,9 @@ class DevConfig(Config):
     """Development config class."""
     # Open the DEBUG
     DEBUG = True
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:kbsonlong@along_db:33060/cmdb'
-    SQLALCHEMY_TRACK_MODIFICATIONS = True
+    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:kbsonlong@along_db:8080/cmdb2'
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
     ##解决the session is unavailable because no secret key was set.错误
-    SECRET_KEY='kbsonlong'
+    SECRET_KEY='kbsonlong2'
+    WEB_LOGFILE='web.log'
+    API_LOGFILE='api.log'

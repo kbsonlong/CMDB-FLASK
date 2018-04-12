@@ -37,10 +37,10 @@ def login():
 # @login_required
 def home():
     """View function for home page"""
-    authorization = session['author']
-    print authorization
     if 'username' in session:
         username = session['username']
+        authorization = session['author']
+        app.logger.info(authorization)
         return render_template('WEB/index.html', username=username)
     return redirect(url_for('login'))
 

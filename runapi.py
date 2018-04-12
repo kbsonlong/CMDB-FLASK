@@ -2,8 +2,12 @@
 # -*- encoding: utf-8 -*-
 from api import app
 from config import DevConfig
+import logging
 app.config.from_object(DevConfig)
-
+# fmter = logging.Formatter('%(asctime)s %(levelname)s %(message)s', datefmt='%a, %d %b %Y %H:%M:%S')
+# handler = logging.FileHandler(DevConfig.API_LOGFILE)
+# handler.setFormatter(fmt=fmter)
+# app.logger.addHandler(handler)
 
 if __name__ == '__main__':
     app.run(port=5001)

@@ -4,6 +4,8 @@ from flask_login import UserMixin
 from datetime import datetime
 from flask_sqlalchemy import SQLAlchemy
 from api import  app
+from werkzeug.security import generate_password_hash, check_password_hash
+
 db = SQLAlchemy(app)
 
 
@@ -38,6 +40,17 @@ class User(db.Model, UserMixin):
 
     def __repr__(self):
         return "<Mode User '{}'>".format(self.username)
+
+    @property
+    def passwd(self):
+        raise AttributeError('passwd cannot be read');
+
+    @passwd.setter
+    def passwd(self, passwd):
+        self.password = generate_password_hash(passwd)
+
+    def confirm_password(self, passwd):
+        return check_password_hash(self.password, passwd)
 
 
 #角色表

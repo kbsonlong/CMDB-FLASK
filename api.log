@@ -1,0 +1,11 @@
+errmsg : 需要输入用户名和密码 
+ None
+
+Thu, 12 Apr 2018 10:16:56 WARNING errmsg : 需要输入用户名和密码 
+ None
+
+12-Apr-2018 10:36:58 views.py-login:[19] api  WARNING test
+12-Apr-2018 10:41:45 views.py-login:[19] api  WARNING test
+12-Apr-2018 10:42:59 views.py-login:[16] api  WARNING test
+12-Apr-2018 10:58:57 views.py-login:[16] api  WARNING test
+12-Apr-2018 10:59:09 views.py-login:[16] api  WARNING test
