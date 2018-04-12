@@ -153,16 +153,40 @@ def hostcreate(host,ip,group,port=10050):
 
 #添加主机模板
 def hostupdate(hostid,data):
-    up_data = {
+    """
+    data.keys()[0]
+    templates_clear : 清除模板
+    templates       : 添加模板
+    groups          : 替换当前主机所属主机组
+    status          : 禁用或启用主机
+    更多参考zabbix官网api文档https://www.zabbix.com/documentation/3.4/zh/api/reference
+    """
+    params = {
             "hostid" : hostid,
             data.keys()[0] : data.values()[0]
         }
-    return zapi.host.update(up_data)
+    return zapi.host.update(params)
 
-data = {"templates_clear": [
-            {
-                "templateid": "10093"
-            }
-        ]}
 
-print hostupdate(10254,data)
+
+if __name__ == '__main__':
+
+    data = {"templates_clear":
+        [
+            {"templateid": "10093"},
+            ##多个模板填写多个模板id
+            {"templateid": "10001"}
+        ]
+    }
+
+    data = {"templates":
+        [
+            {"templateid": "10093"},
+            ##多个模板填写多个模板id
+            {"templateid": "10001"}
+        ]
+    }
+
+    # data = {'status':1}
+
+    print hostupdate(10254,data)
