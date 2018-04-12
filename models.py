@@ -24,7 +24,7 @@ class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.INTEGER,primary_key=True)
     username = db.Column(db.String(255),comment='用户名')
-    password = db.Column(db.String(255),comment='密码')
+    password_hash = db.Column(db.String(255),comment='密码')
     name = db.Column(db.String(80), unique=True,comment='姓名',default=username)
     email = db.Column(db.String(64),comment='邮箱')
     mobile = db.Column(db.String(16),comment='手机号码')
@@ -33,24 +33,20 @@ class User(db.Model, UserMixin):
     join_date = db.Column(db.DateTime, nullable=False,default=datetime.utcnow,comment='注册时间')
     last_login = db.Column(db.DateTime, nullable=False,default=datetime.utcnow,comment='最后登录时间')
 
-    def __init__(self,id,username,password):
-        self.id = id
-        self.username = username
-        self.password = password
 
     def __repr__(self):
         return "<Mode User '{}'>".format(self.username)
 
     @property
-    def passwd(self):
-        raise AttributeError('passwd cannot be read');
+    def password(self):
+        raise AttributeError('Password is not a readable attribute')
 
-    @passwd.setter
-    def passwd(self, passwd):
-        self.password = generate_password_hash(passwd)
+    @password.setter
+    def password(self, password):
+        self.password_hash = generate_password_hash(password)
 
-    def confirm_password(self, passwd):
-        return check_password_hash(self.password, passwd)
+    def verify_password(self, password):
+        return check_password_hash(self.password_hash, password)
 
 
 #角色表

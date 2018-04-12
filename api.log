@@ -9,3 +9,50 @@ Thu, 12 Apr 2018 10:16:56 WARNING errmsg : 需要输入用户名和密码
 12-Apr-2018 10:42:59 views.py-login:[16] api  WARNING test
 12-Apr-2018 10:58:57 views.py-login:[16] api  WARNING test
 12-Apr-2018 10:59:09 views.py-login:[16] api  WARNING test
+12-Apr-2018 13:59:04 views.py-login:[16] api  WARNING test
+12-Apr-2018 13:59:43 views.py-login:[16] api  WARNING test
+12-Apr-2018 14:01:11 views.py-login:[16] api  WARNING test
+12-Apr-2018 14:01:46 views.py-login:[16] api  WARNING test
+12-Apr-2018 14:03:45 views.py-login:[16] api  WARNING test
+12-Apr-2018 14:05:32 views.py-login:[16] api  WARNING test
+12-Apr-2018 14:05:35 views.py-login:[40] api  WARNING errmsg:登录失败
+Traceback (most recent call last):
+  File "G:\devleop_space\CMDB\api\views.py", line 33, in login
+    db.session.query(User).filter(user.username).update(data)
+  File "G:\devleop_space\CMDB\venv\lib\site-packages\sqlalchemy\orm\query.py", line 3380, in update
+    update_op.exec_()
+  File "G:\devleop_space\CMDB\venv\lib\site-packages\sqlalchemy\orm\persistence.py", line 1325, in exec_
+    self._do_pre_synchronize()
+  File "G:\devleop_space\CMDB\venv\lib\site-packages\sqlalchemy\orm\persistence.py", line 1402, in _do_pre_synchronize
+    'synchronize_session parameter.' % err)
+InvalidRequestError: Could not evaluate current criteria in Python: "Cannot evaluate TextClause". Specify 'fetch' or False for the synchronize_session parameter.
+
+12-Apr-2018 14:06:56 views.py-login:[16] api  WARNING test
+12-Apr-2018 14:06:58 views.py-login:[40] api  WARNING errmsg:登录失败
+Traceback (most recent call last):
+  File "G:\devleop_space\CMDB\api\views.py", line 33, in login
+    db.session.query(User).filter_by(username = username).first().update(data)
+AttributeError: 'User' object has no attribute 'update'
+
+12-Apr-2018 14:08:14 views.py-login:[16] api  WARNING test
+12-Apr-2018 14:08:20 views.py-login:[16] api  WARNING test
+12-Apr-2018 14:09:22 views.py-login:[16] api  WARNING test
+12-Apr-2018 14:09:26 views.py-login:[41] api  WARNING errmsg:登录失败
+Traceback (most recent call last):
+  File "G:\devleop_space\CMDB\api\views.py", line 36, in login
+    token = get_validate(user.username,DevConfig.SECRET_KEY)
+AttributeError: 'int' object has no attribute 'username'
+
+12-Apr-2018 14:10:11 views.py-login:[16] api  WARNING test
+12-Apr-2018 14:12:47 views.py-login:[16] api  WARNING test
+12-Apr-2018 14:15:01 views.py-login:[16] api  WARNING test
+12-Apr-2018 14:15:14 views.py-login:[16] api  WARNING test
+12-Apr-2018 14:19:09 views.py-login:[16] api  WARNING test
+12-Apr-2018 14:19:11 views.py-login:[40] api  WARNING errmsg:输入密码有误
+None
+
+12-Apr-2018 14:19:15 views.py-login:[16] api  WARNING test
+12-Apr-2018 14:19:38 utils.py-validate:[25] api  WARNING errmsg:登录已过期
+None
+
+12-Apr-2018 14:21:13 views.py-login:[16] api  WARNING test

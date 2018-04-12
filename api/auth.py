@@ -9,11 +9,14 @@ def auth_login(func):
     def wrapper(*arg, **kwargs):
         try:
             author = session['author']
+            # username = request.args.get('username', None)
             res = validate(author,DevConfig.SECRET_KEY)
             res = json.loads(res)
             #res = {u'username': u'admin', u'code': 0, u'uid': u'1', u'r_id': u'1'}
             if int(res['code']) == 1:
                 return json.dumps({'code': 1, 'errmsg': '%s' % res['errmsg']})
+            # if res['username'] != username:
+            #     return json.dumps({'code': 1, 'errmsg': '验证异常'})
         except:
             return json.dumps({'code': 1, 'errmsg': '验证异常'})
         return func(res, *arg, **kwargs)

@@ -14,6 +14,7 @@ migrate = Migrate(api.app, models.db)
 manager.add_command("server", Server())
 manager.add_command("db", MigrateCommand)
 
+
 @manager.shell
 def make_shell_context():
     """Create a python CLI.

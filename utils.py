@@ -21,10 +21,13 @@ def validate(key, fix_pwd):
     if len(x) != 3:
         write_log('api').warning('Errmsg:token参数不足\n%s' % traceback.format_exc())
         return json.dumps({'code':1,'errmsg':'token参数不足'})
+    print t
+    print int(x[1]) + 2*60*60
     if t > int(x[1]) + 2*60*60:
         write_log('api').warning('errmsg:登录已过期\n%s' % traceback.format_exc() )
         return json.dumps({'code':1,'errmsg':'登录已过期'})
     validate_key = hashlib.md5('%s%s%s' % (x[0], x[1], fix_pwd)).hexdigest()
+    print validate_key
     if validate_key == x[2]:
         return json.dumps({'code':0,'username':x[0],'token':x[2]})
     else:
