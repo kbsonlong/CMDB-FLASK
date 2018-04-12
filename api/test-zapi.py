@@ -1,5 +1,7 @@
 #coding:utf8
 from zabbix_client import ZabbixServerProxy
+from api import app
+
 
 class Zabbix():
     def __init__(self,data):
@@ -100,7 +102,7 @@ print zapi.host.get({"filter":{"host":host_name}})[0]['name']
 
 
 
-##参考zabbix官网api文档https://www.zabbix.com/documentation/{version}/manual/api/reference
+##参考zabbix官网api文档https://www.zabbix.com/documentation/3.4/zh/api/reference
 from pyzabbix import ZabbixAPI
 
 zapi = ZabbixAPI(zabbix_server)
@@ -108,20 +110,59 @@ zapi.login(zabbix_user, zabbix_pass)
 print("Connected to Zabbix API Version %s" % zapi.api_version())
 
 ##监控图表
-for graph in zapi.graph.get(output="extend",hostids=10084):
-    print graph
-
-##监控主机
+# for graph in zapi.graph.get(output="extend",hostids=10084):
+#     print graph
+#
+# ##监控主机
 for h in zapi.host.get(output="extend"):
     print(h['hostid'])
-
-#监控项
-for item in zapi.item.get(output="extend",hostids=10084):
-    print item
+#
+# #监控项
+# for item in zapi.item.get(output="extend",hostids=10084):
+#     print item
 
 #主机组
 for group in zapi.hostgroup.get(output="extend"):
-    print group
+    print group['groupid'],group['name']
 
 
-print zapi.host.create(groupid=50,templateid=20045,ip='192.168.3.1',host='Linux server')
+host = 'Linux server'
+#创建主机
+def hostcreate(host,ip,group,port=10050):
+    data = {
+            "host": host,
+            "interfaces": [
+                {
+                    "type": 1,
+                    "main": 1,
+                    "useip": 1,
+                    "ip": ip,
+                    "dns": "",
+                    "port": port
+                }
+              ],
+            "groups": [
+                {
+                    "groupid": int(group)
+                }
+             ]
+             }
+    ret = zapi.host.create(data)
+    return ret
+
+
+#添加主机模板
+def hostupdate(hostid,data):
+    up_data = {
+            "hostid" : hostid,
+            data.keys()[0] : data.values()[0]
+        }
+    return zapi.host.update(up_data)
+
+data = {"templates_clear": [
+            {
+                "templateid": "10093"
+            }
+        ]}
+
+print hostupdate(10254,data)
