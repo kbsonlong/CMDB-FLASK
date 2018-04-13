@@ -60,12 +60,9 @@ def zabbix(htmlname):
     headers['authorization'] = session['author']
     validate_result = json.loads(validate(session['author'], DevConfig.SECRET_KEY))
     url = "http://%s/api/zbhost" % '127.0.0.1:5001'
-    print url
     r = requests.get(url, headers=headers)
-    print r.content
     result = json.loads(r.content)
-    print result['errmsg']
     if int(validate_result['code']) == 0:
-        return render_template('WEB/hosts.html',info=session,username=session['username'])
+        return render_template('WEB/'+htmlname+'.html',info=session,username=session['username'])
     else:
         return render_template('WEB/'+htmlname+'.html',errmsg=validate_result['errmsg'])
