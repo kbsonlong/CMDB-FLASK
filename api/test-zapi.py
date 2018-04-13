@@ -117,7 +117,7 @@ print("Connected to Zabbix API Version %s" % zapi.api_version())
 for h in zapi.host.get(output="extend"):
     print(h['hostid'])
 #
-# #监控项
+# #监控项s
 # for item in zapi.item.get(output="extend",hostids=10084):
 #     print item
 
