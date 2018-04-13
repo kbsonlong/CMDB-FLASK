@@ -9,8 +9,8 @@ import ConfigParser
 import time,json,traceback
 
 @app.route('/api/zbhost')
-@auth_login
-def host(auth_info,**kwargs):
+# @auth_login
+def host(**kwargs):
     try:
         zapi=ZabbixAPI()
         host_list=zapi.HostGet()

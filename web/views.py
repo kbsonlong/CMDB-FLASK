@@ -54,7 +54,6 @@ def logout():
 #zabbix 监控
 @app.route('/zabbix/<htmlname>')
 def zabbix(htmlname):
-    print session['author']
     if session.get('author','nologin') == 'nologin':
         return redirect('/login')
     headers['authorization'] = session['author']
@@ -62,8 +61,8 @@ def zabbix(htmlname):
     url = "http://%s/api/zbhost" % '127.0.0.1:5001'
     r = requests.get(url, headers=headers)
     result = json.loads(r.content)
-    if int(validate_result['code']) == 0:
-
-        return render_template('WEB/'+htmlname+'.html',info=session,username=session['username'])
+    print result
+    if int(result['code']) == 0:
+        return render_template('WEB/'+htmlname+'.html',username=session['username'],hosts=result['result']['hosts'])
     else:
         return render_template('WEB/'+htmlname+'.html',errmsg=validate_result['errmsg'])
