@@ -63,6 +63,7 @@ def zabbix(htmlname):
     r = requests.get(url, headers=headers)
     result = json.loads(r.content)
     if int(validate_result['code']) == 0:
+
         return render_template('WEB/'+htmlname+'.html',info=session,username=session['username'])
     else:
         return render_template('WEB/'+htmlname+'.html',errmsg=validate_result['errmsg'])
