@@ -32,7 +32,6 @@ def host_create(request):
     ip=request.GET.get('ip','')
     groupid=request.GET.get('groupid','')
     templateid=request.GET.get('templateid','')
-
     try:
         zapi=ZabbixAPI()
         hostcreate=zapi.HostCreate(name,ip,groupid,templateid)
