@@ -122,7 +122,9 @@ for h in zapi.host.get(output="extend"):
 #     print item
 
 #主机组
-for group in zapi.hostgroup.get(output="extend"):
+group_name = ['Linux servers']
+print zapi.hostgroup.get(output="extend",filter={"name": group_name})
+for group in zapi.hostgroup.get(output="extend",filter={"name": group_name}):
     print group['groupid'],group['name']
 
 
@@ -151,7 +153,7 @@ def hostcreate(host,ip,group,port=10050):
     return ret
 
 
-#添加主机模板
+#更新主机
 def hostupdate(hostid,data):
     """
     data.keys()[0]

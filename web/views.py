@@ -4,6 +4,7 @@ from web import app
 from flask_jsonrpc import JSONRPC
 import requests,json
 from config import DevConfig
+from utils import validate
 
 jsonrpc = JSONRPC(app, '/api')
 headers = {'content-type': 'application/json'}
@@ -26,6 +27,7 @@ def login():
         if result['code'] == 0:
             session['username'] = username
             session['author'] = result['authorization']
+            headers['authorization'] = session['author']
             return redirect(url_for('home'))
         elif result['code'] == 1:
             info = result['errmsg']
@@ -47,3 +49,23 @@ def logout():
     # remove the username from the session if it's there
     session.pop('username', None)
     return redirect(url_for('login'))
+
+
+#zabbix 监控
+@app.route('/zabbix/<htmlname>')
+def zabbix(htmlname):
+    print session['author']
+    if session.get('author','nologin') == 'nologin':
+        return redirect('/login')
+    headers['authorization'] = session['author']
+    validate_result = json.loads(validate(session['author'], DevConfig.SECRET_KEY))
+    url = "http://%s/api/zbhost" % '127.0.0.1:5001'
+    print url
+    r = requests.get(url, headers=headers)
+    print r.content
+    result = json.loads(r.content)
+    print result['errmsg']
+    if int(validate_result['code']) == 0:
+        return render_template('WEB/hosts.html',info=session,username=session['username'])
+    else:
+        return render_template('WEB/'+htmlname+'.html',errmsg=validate_result['errmsg'])

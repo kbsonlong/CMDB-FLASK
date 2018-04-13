@@ -34,6 +34,8 @@ def login():
             User.query.filter_by(username=username).update(data)
             db.session.commit()
             token = get_validate(user.username,DevConfig.SECRET_KEY)
+            session['author'] = token
+            print token
             return json.dumps({'code': 0, 'authorization': token})
         else:
             write_log('api').warning('errmsg:输入密码有误\n%s' % traceback.format_exc())

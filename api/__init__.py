@@ -12,7 +12,7 @@ app.config.from_object(DevConfig)
 jsonrpc = JSONRPC(app, '/api')
 db = SQLAlchemy(app)
 import views
-
+import zabbix_view
 
 if __name__ == '__main__':
     app.run(port=5001,debug=True)
