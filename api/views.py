@@ -9,14 +9,18 @@ from utils import write_log,get_validate
 from config import DevConfig
 
 
-@app.route('/api/login', methods=['GET'])
+@app.route('/api/login', methods=['GET','POST'])
 def login():
     """View function for home page"""
     # 判断是否是验证提交
     try:
-        username = request.args.get('username', None)
-        password = request.args.get('passwd', None)
-
+        if request.method == 'GET':
+            username = request.args.get('username', None)
+            password = request.args.get('passwd', None)
+        elif request.method == 'POST':
+            username = request.form.get('username')
+            password = request.form.get('password')
+            print username,password
         if not (username and password):
             write_log('api').warning('errmsg:需要输入用户名和密码\n%s' % traceback.format_exc())
             return json.dumps({'code': 1, 'errmsg': "需要输入用户名和密码"})
