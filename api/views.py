@@ -18,9 +18,8 @@ def login():
             username = request.args.get('username', None)
             password = request.args.get('passwd', None)
         elif request.method == 'POST':
-            username = request.form.get('username')
-            password = request.form.get('password')
-            print username,password
+            username = json.loads(request.data)['username']
+            password = json.loads(request.data)['password']
         if not (username and password):
             write_log('api').warning('errmsg:需要输入用户名和密码\n%s' % traceback.format_exc())
             return json.dumps({'code': 1, 'errmsg': "需要输入用户名和密码"})
