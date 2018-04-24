@@ -120,3 +120,4 @@ def history(request):
     except Exception as e:
         error=str(e)
     return render_template(request, 'ZABBIX/history.html', locals())
+
