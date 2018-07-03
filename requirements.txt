@@ -28,7 +28,7 @@ MarkupSafe==1.0
 matplotlib==2.2.2
 numpy==1.14.2
 pandas==0.22.0
-public==1.0.1
+public
 PyMySQL==0.8.0
 pyparsing==2.2.0
 python-dateutil==2.7.2
