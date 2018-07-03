@@ -69,3 +69,12 @@
 ### 安装zabbix-agent
 
     docker run --name cmdb-zabbix-agent --link cmd-zabbix-server-mysql:zabbix-server -d zabbix/zabbix-agent:latest
+
+
+### 安装Jenkins
+
+docker run -d -p 9000:8080 -p 50000:50000 --name jenkins --privileged=true --restart=always  \
+       -v /data/jenkins:/var/jenkins_home  -v /var/run/docker.sock:/var/run/docker.sock \
+       -v /usr/lib64/libltdl.so.7:/usr/lib/x86_64-linux-gnu/libltdl.so.7 \
+       -v $(which docker):/usr/bin/docker jenkins
+
