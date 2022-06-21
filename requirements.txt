@@ -26,7 +26,7 @@ kiwisolver==1.0.1
 Mako==1.0.7
 MarkupSafe==1.0
 matplotlib==2.2.2
-numpy==1.14.2
+numpy==1.22.0
 pandas==0.22.0
 public
 PyMySQL==0.8.0
